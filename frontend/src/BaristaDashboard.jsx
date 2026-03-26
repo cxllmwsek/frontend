@@ -6,15 +6,15 @@ function BaristaDashboard() {
   // ฟังก์ชันดึงรายการออเดอร์ที่สถานะ pending
   const fetchOrders = async () => {
     try {
+      // 🌟 แก้ลิงก์เป็นของ Render
       const response = await fetch('https://coffee-backend-api.onrender.com/api/orders/pending');
       const data = await response.json();
-      setOrders(data); // 🌟 ยัดใส่ State ได้เลยเพราะหลังบ้านกรองมาให้แล้ว
+      setOrders(data);
     } catch (error) {
       console.error('เกิดข้อผิดพลาดในการดึงออเดอร์:', error);
     }
   };
 
-  // ดึงข้อมูลครั้งแรกเมื่อเปิดหน้าเว็บ และตั้งเวลารีเฟรชทุกๆ 5 วินาที
   useEffect(() => {
     fetchOrders();
     const interval = setInterval(fetchOrders, 5000); 
@@ -28,6 +28,7 @@ function BaristaDashboard() {
     }
 
     try {
+      // 🌟 แก้ลิงก์เป็นของ Render
       const response = await fetch(`https://coffee-backend-api.onrender.com/api/orders/${orderId}/complete`, {
         method: 'PUT',
       });
@@ -40,6 +41,7 @@ function BaristaDashboard() {
       }
     } catch (error) {
       console.error('Error:', error);
+      alert('❌ เชื่อมต่อเซิร์ฟเวอร์ไม่ได้');
     }
   };
 
@@ -64,7 +66,6 @@ function BaristaDashboard() {
               <div>
                 <h3 style={{ margin: '0 0 10px 0', color: '#4A3B32' }}>บิลออเดอร์ #{order.order_id}</h3>
                 
-                {/* 🌟 แสดงรายการเครื่องดื่ม */}
                 <div style={{ marginBottom: '10px', padding: '10px', backgroundColor: '#fff', borderRadius: '5px', border: '1px dashed #ccc' }}>
                   <strong>รายการเครื่องดื่ม:</strong>
                   <ul style={{ margin: '5px 0 0 0', paddingLeft: '20px', color: '#333' }}>
